@@ -11,12 +11,23 @@ public class GameManager : MonoBehaviour
     public static int Lives = 3;
     public static int Score = 0;
 
+    public static GameManager ins;
+
+    private void Awake()
+    {
+
+     
+    }
     void Start()
     {
-        Lives = 3;
-        Score = 0;
-        Time.timeScale = 0;
-        CurrentState = GameState.GameIdle;
+
+      
+            Lives = 3;
+            Score = 0;
+            Time.timeScale = 0;
+            CurrentState = GameState.GameIdle;
+        
+     
     }
     
     void Update()

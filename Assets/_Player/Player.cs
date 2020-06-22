@@ -14,9 +14,13 @@ public class Player : MonoBehaviour
     private Animator thisAnimator = null;
 
     private float moveSpeed = 0.05f;
+    public GameObject exp;
+    private AudioSource AS;
 
     void Start()
     {
+        PlayerPrefs.SetFloat("s", 0);
+        AS = GetComponent<AudioSource>();
         thisController = GetComponent<CharacterController>();
         thisAnimator = GetComponentInChildren<Animator>();
         playerMesh = transform.GetChild(0);
@@ -52,6 +56,20 @@ public class Player : MonoBehaviour
 
         thisController.Move(MoveDirection);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -1.5f, 1.5f), transform.position.y, transform.position.z);
+     
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Instantiate(exp, transform.position, Quaternion.identity);
+        AS.Play();
+        GameManager.Lives -= 1;
+        HUD.HUDManager.UpdateLives();
+        if (GameManager.Lives <= 0)
+        {
+            PlayerPrefs.SetFloat("s", GameManager.Score);
+            HUD.HUDManager.GameOver();
+        }
+        Destroy(other.gameObject);
     }
 
 }

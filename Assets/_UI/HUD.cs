@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
@@ -30,8 +31,7 @@ public class HUD : MonoBehaviour
     {
         Time.timeScale = 0;
         GameManager.CurrentState = GameManager.GameState.GameOver;
-        Txt_Message.color = Color.red;
-        Txt_Message.text = "GAME OVER! \n PRESS ENTER TO RESTART GAME.";
+        SceneManager.LoadScene(1);
     }
 
     public void DismissMessage()
